@@ -53,6 +53,10 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 ```hcl
 module "assumed_roles" {
   source              = "git::https://github.com/cloudposse/terraform-aws-iam-assumed-roles.git?ref=master"
+  providers           = {
+    aws     = "aws"
+    aws.sub = "aws.prod"
+  }
   namespace           = "cp"
   stage               = "prod"
   admin_name          = "admin"
@@ -91,6 +95,7 @@ Available targets:
 | readonly_user_names | Optional list of IAM user names to add to the readonly group | list | `<list>` | no |
 | stage | Stage (e.g. `prod`, `dev`, `staging`) | string | - | yes |
 | tags | Additional tags (e.g. map(`BusinessUnit`,`XYZ`) | map | `<map>` | no |
+| use_sub_provider | Whether or not to use the aws.sub provider when creating roles | string | `false` | no |
 
 ## Outputs
 
